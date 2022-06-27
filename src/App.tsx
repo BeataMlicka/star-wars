@@ -1,5 +1,7 @@
 import React, { useEffect, useReducer } from 'react'
 
+import Main from './components/Main'
+
 const ACTIONS = {
   SAVE_DATA: 'SAVE_DATA',
 }
@@ -29,6 +31,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <Main list={data} />
     </div>
   );
 }
