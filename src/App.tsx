@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useReducer, useState } from 'react'
 
 import Header from './components/Header'
 import Main from './components/Main'
+import Footer from './components/Footer'
 
 const ACTIONS = {
   SAVE_DATA: 'SAVE_DATA',
@@ -40,9 +41,10 @@ const App = () => {
   const search = (event: any) => setQuery({ ...query, search: event.target.value.toLowerCase() })
 
   return (
-    <div className="App">
+    <div className='app'>
       <Header search={search} />
       <Main list={displayedList} />
+      <Footer />
     </div>
   );
 }

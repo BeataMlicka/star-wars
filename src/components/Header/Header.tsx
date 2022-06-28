@@ -7,7 +7,7 @@ type HeaderTypes = {
 const Header: React.FC<HeaderTypes> = ({ search }) => {
   return (
     <form className='header'>
-      <input onChange={search} />
+      <input type='text' onChange={search} />
     </form>
   )
 }
