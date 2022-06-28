@@ -6,13 +6,19 @@ import Footer from './components/Footer'
 
 const ACTIONS = {
   SAVE_DATA: 'SAVE_DATA',
+  UPLOAD_DATA: 'UPLOAD_DATA',
 }
 
 const reducer = (state: any, action: any) => {
   switch(action.type) {
     case ACTIONS.SAVE_DATA:
-      console.log('SAVE DATA - ', action)
       return action.payload
+    case ACTIONS.UPLOAD_DATA:
+      console.log('STRES - ', state.results)
+      return {
+        ...action.payload,
+        results: [...state.results, ...action.payload.results]
+      }
     default:
       return state
   }
@@ -46,10 +52,21 @@ const App = () => {
   const search = (event: any) => setQuery({ ...query, search: event.target.value.toLowerCase() })
   const handleToogle = (event: any) => setToggle(event.target.checked)
 
+  const loadMoreItems = async () => {
+    console.log('DATA NEXT - ', data.next)
+    if (data.next) {
+      const response = await fetch(data.next)
+      const responseJSON = await response.json()
+      dispatch({ type: ACTIONS.UPLOAD_DATA, payload: responseJSON})
+    }
+  }
+
+  console.log('DATA - ', data)
+
   return (
     <div className='app'>
       <Header search={search} />
-      <Main list={displayedList} />
+      <Main list={displayedList} hasMoreItems={data.next} loadMoreItems={loadMoreItems} />
       <Footer handleToggle={handleToogle} />
     </div>
   );
