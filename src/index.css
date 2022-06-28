@@ -13,7 +13,29 @@ code {
 }
 
 .main {
-  width: 100%;
-  height: 50px;
-  border: 1px solid red;
+  display: grid;
+  width: 660px;
+  height: auto;
+  margin: 0 auto 20px;
+  display: grid;
+  grid-template-columns: 160px 160px 160px 160px;
+  grid-template-columns: 160px 160px 160px 160px;
+}
+
+.item {
+  width: 160px;
+  height: 160px;
+  border: 1px solid green;
+}
+
+.item:nth-child(4n + 3),
+.item:nth-child(4n + 4) {
+  transform: translate(20px);
+}
+
+.item:nth-child(8n + 1),
+.item:nth-child(8n + 2),
+.item:nth-child(8n + 3),
+.item:nth-child(8n + 4) {
+  margin-top: 20px;
 }
