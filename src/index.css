@@ -123,12 +123,14 @@ body,
 
 .footer__average {
   font-size: 30px;
-  padding: 20px;
+  padding: 10px;
   font-weight: 600;
 }
 
 .footer__average span {
+  font-size: 25px;
   font-weight: 400;
+  display: block;
 }
 
 .item {
@@ -183,9 +185,13 @@ body,
   width: 60px;
   height: 30px;
   border-radius: 15px;
-  background-color: #eff0eb;
-  border: 1px solid #141b21;
+  background-color: rgb(20, 27, 33, 0.98);
+  border: 1px solid black;
   margin: 10px auto;
+}
+
+.checkbox--focus {
+  border: 1spx solid white;
 }
 
 .checkbox input {
@@ -194,6 +200,7 @@ body,
   width: 100%;
   height: 90%;
   z-index: 10;
+  left: 0;
 }
 
 .checkbox__button {
