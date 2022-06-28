@@ -21,6 +21,7 @@ const reducer = (state: any, action: any) => {
 const App = () => {
   const [data, dispatch] = useReducer(reducer, {})
   const [query, setQuery] = useState<{ search: string }>({ search: '' })
+  const [toggle, setToggle] = useState(false)
 
   const fetchData = async () => {
     const response = await fetch('https://swapi.dev/api/people/')
@@ -34,17 +35,22 @@ const App = () => {
 
   const displayedList = useMemo(() => {
     if (!data || !data.results) return []
-    if (data.results && query.search) data.results.filter((item: any) => item.name.toLowerCase().includes(query.search))
+    if (query.search && toggle) return data.results.filter((item: any) => (
+      item.name.toLowerCase().includes(query.search) && item.height > 100
+    ))
+    if (query.search) return data.results.filter((item: any) => item.name.toLowerCase().includes(query.search))
+    if (toggle) return data.results.filter((item: any) => item.height > 100)
     return data.results
-  }, [data.results, query])
+  }, [data.results, query, toggle])
 
   const search = (event: any) => setQuery({ ...query, search: event.target.value.toLowerCase() })
+  const handleToogle = (event: any) => setToggle(event.target.checked)
 
   return (
     <div className='app'>
       <Header search={search} />
       <Main list={displayedList} />
-      <Footer />
+      <Footer handleToggle={handleToogle} />
     </div>
   );
 }
