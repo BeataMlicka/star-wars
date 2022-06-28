@@ -8,11 +8,11 @@ type MainTypes = {
 }
 
 const Main: React.FC<MainTypes> = ({ list }) => {
-  if(!list.length) return null
+  if(!list || !list.length) return <div>List is empty</div>
   return (
     <div className='main'>
       {
-        list.map((item) => <Item />)
+        list.map(item => <Item item={item} />)
       }
     </div>
   )

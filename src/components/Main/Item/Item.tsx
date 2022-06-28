@@ -1,10 +1,22 @@
 import React from 'react'
 
-const Item: React.FC = () => {
+import Character from '../../../types/Character'
 
+type ItemTypes = {
+  item: Character,
+}
+
+const Item: React.FC<ItemTypes> = ({ item }) => {
+
+  // console.log(item)
   return (
     <div className='item' >
-      xyz
+      <div className='item__top'>
+        {item.height}
+      </div>
+      <div className='item__bottom'>
+        {item.name}
+      </div>
     </div>
   )
 }
