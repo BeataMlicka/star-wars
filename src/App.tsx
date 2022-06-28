@@ -14,7 +14,6 @@ const reducer = (state: any, action: any) => {
     case ACTIONS.SAVE_DATA:
       return action.payload
     case ACTIONS.UPLOAD_DATA:
-      console.log('STRES - ', state.results)
       return {
         ...action.payload,
         results: [...state.results, ...action.payload.results]
@@ -49,11 +48,19 @@ const App = () => {
     return data.results
   }, [data.results, query, toggle])
 
+  const averageHeight = useMemo(() => {
+    let sum = 0
+    displayedList.forEach((item: any) => {
+      if(item.height !== 'unknown') sum += parseInt(item.height)
+    })
+
+    return Math.round(sum / displayedList.length * 100) / 100
+  }, [displayedList])
+
   const search = (event: any) => setQuery({ ...query, search: event.target.value.toLowerCase() })
   const handleToogle = (event: any) => setToggle(event.target.checked)
 
   const loadMoreItems = async () => {
-    console.log('DATA NEXT - ', data.next)
     if (data.next) {
       const response = await fetch(data.next)
       const responseJSON = await response.json()
@@ -61,13 +68,11 @@ const App = () => {
     }
   }
 
-  console.log('DATA - ', data)
-
   return (
     <div className='app'>
       <Header search={search} />
       <Main list={displayedList} hasMoreItems={data.next} loadMoreItems={loadMoreItems} />
-      <Footer handleToggle={handleToogle} />
+      <Footer handleToggle={handleToogle} averageHeight={averageHeight} />
     </div>
   );
 }
