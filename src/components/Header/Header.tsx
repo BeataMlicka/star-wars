@@ -1,15 +1,13 @@
 import React from 'react'
 
 type HeaderTypes = {
-  search: any,
+  search: React.ChangeEventHandler<HTMLInputElement>,
 }
 
-const Header: React.FC<HeaderTypes> = ({ search }) => {
-  return (
-    <form className='header'>
-      <input type='text' onChange={search} />
-    </form>
-  )
-}
+const Header: React.FC<HeaderTypes> = ({ search }) => (
+  <form className='header'>
+    <input type='text' onChange={search} />
+  </form>
+)
 
 export default Header

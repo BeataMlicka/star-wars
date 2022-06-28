@@ -1,29 +1,26 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState } from 'react'
 
 type CheckboxTypes = {
-  onChange: any,
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 const Checkbox: React.FC<CheckboxTypes> = ({ onChange }) => {
-  const [checkboxState, setChecboxState] = useState(false)
-  const [checkboxFocus, setChecboxFocus] = useState(false)
+  const [checkbox, setChecbox] = useState({ isChecked: false, isFocused: false })
 
-  const handleCheckboxChange = (event: any) => {
-    setChecboxState(event.target.checked)
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecbox({ ...checkbox, isChecked: event.target.checked })
     onChange(event)
   }
 
-  console.log('CH ', checkboxFocus)
-
   return (
-    <div className={`checkbox ${checkboxFocus ? 'checkbox--focus' : ''}`}>
+    <div className={`checkbox ${checkbox.isFocused ? 'checkbox--focus' : ''}`}>
       <input
         type='checkbox'
         onChange={handleCheckboxChange}
-        onFocus={() => setChecboxFocus(true)}
-        onBlur={() => setChecboxFocus(false)}
+        onFocus={() => setChecbox({ ...checkbox, isFocused: true })}
+        onBlur={() => setChecbox({ ...checkbox, isFocused: false })}
       />
-      <div className={`checkbox__button ${checkboxState ? 'checkbox__button--checked' : ''}`} />
+      <div className={`checkbox__button ${checkbox.isChecked ? 'checkbox__button--checked' : ''}`} />
     </div>
   )
 }

@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import Checkbox from './Checkbox'
 
 type FooterTypes = {
   averageHeight: number,
-  handleToggle: any,
+  handleToggle: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 const Footer: React.FC<FooterTypes> = ({ averageHeight, handleToggle }) => {
-  const onChange = (event: any) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleToggle(event)
   }
 
