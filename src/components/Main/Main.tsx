@@ -4,12 +4,12 @@ import Character from '../../types/Character'
 import Item from './Item'
 
 type MainTypes = {
-  list: Array<Character>,
-  hasMoreItems?: string,
+  list: Array<Character> | null,
+  nextPage?: string,
   loadMoreItems: () => void,
 }
 
-const Main: React.FC<MainTypes> = ({ list, loadMoreItems, hasMoreItems }) => (
+const Main: React.FC<MainTypes> = ({ list, loadMoreItems, nextPage }) => (
   <div className='main'>
     {
       !list || !list.length
@@ -23,7 +23,7 @@ const Main: React.FC<MainTypes> = ({ list, loadMoreItems, hasMoreItems }) => (
             </div>
             <div className='main__panel'>
               {
-                hasMoreItems
+                nextPage
                 ? <button onClick={loadMoreItems}>Load more characters</button>
                 : <span>There are no more characters</span>
               }

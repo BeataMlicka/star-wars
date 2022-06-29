@@ -7,7 +7,7 @@ import Action from './types/Action'
 import List from './types/List'
 import Character from './types/Character'
 
-const ACTIONS = {
+export const ACTIONS = {
   SAVE_DATA: 'SAVE_DATA',
   UPLOAD_DATA: 'UPLOAD_DATA',
 }
@@ -53,7 +53,7 @@ const App = () => {
     if (searchQuery && toggle) return data.results.filter((item: Character) => (
       item.name.toLowerCase().includes(searchQuery) && getHeight(item.height) > 100
     ))
-    if (searchQuery) return data.results.filter((item: Character) => item.name.toLowerCase().includes(query.search))
+    if (searchQuery) return data.results.filter((item: Character) => item.name.toLowerCase().includes(searchQuery))
     if (toggle) return data.results.filter((item: Character) => getHeight(item.height) > 100)
     return data.results
   }, [data, searchQuery, toggle])
@@ -82,7 +82,7 @@ const App = () => {
   return (
     <div className='app'>
       <Header search={search} />
-      <Main list={displayedList} hasMoreItems={data.next} loadMoreItems={loadMoreItems} />
+      <Main list={displayedList} nextPage={data.next} loadMoreItems={loadMoreItems} />
       <Footer handleToggle={handleToogle} averageHeight={averageHeight} />
     </div>
   );
