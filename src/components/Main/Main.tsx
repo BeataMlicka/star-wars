@@ -13,7 +13,7 @@ const Main: React.FC<MainTypes> = ({ list, loadMoreItems, nextPage }) => (
   <div className='main'>
     {
       !list || !list.length
-        ? <div className='main__empty-list'>List is empty</div>
+        ? <div className='main__empty-list'>List is empty :(</div>
         : (
           <>
             <div className='main__list'>

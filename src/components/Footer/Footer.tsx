@@ -19,8 +19,8 @@ const Footer: React.FC<FooterTypes> = ({ averageHeight, handleToggle }) => {
         <Checkbox onChange={onChange} />
       </div>
       <div className='footer__average'>
-        <span>Average of height: </span>
-        {averageHeight}
+        <p>Average of height: </p>
+        {averageHeight || 0}
       </div>
     </form>
   )

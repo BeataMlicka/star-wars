@@ -25,7 +25,7 @@ const list = [
 describe('Main component', () => {
   test('render empty list message if there are no items', () => {
     render(<Main list={emptyList} nextPage={'test-address'} loadMoreItems={() => null} />)
-    const emptyListMessage = screen.getByText(/List is empty/i)
+    const emptyListMessage = screen.getByText(/List is empty :\(/i)
     expect(emptyListMessage).toBeInTheDocument()
   })
 

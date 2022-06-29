@@ -59,12 +59,22 @@ const App = () => {
   }, [data, searchQuery, toggle])
 
   const averageHeight = useMemo(() => {
-    let sum = 0
+    const values: Array<number> = []
+
     displayedList.forEach((item: Character) => {
-      if(item.height !== 'unknown') sum += parseInt(item.height)
+      if(item.height === 'unknown') values.push(0)
+      else values.push(parseInt(item.height))
     })
 
-    return Math.round(sum / displayedList.length * 100) / 100
+    const min = Math.min(...values)
+    const max = Math.max(...values)
+
+    const newArray = values.filter(item => item !== min && item !== max)
+    let sum = 0
+
+    newArray.forEach(item => sum += item)
+
+    return Math.round(sum / newArray.length * 100) / 100
   }, [displayedList])
 
   const search = (event: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(event.target.value.toLowerCase())

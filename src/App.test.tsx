@@ -66,12 +66,22 @@ const testDisplayedList = (data: List, searchQuery: string, toggle: boolean) => 
 }
 
 const testAverageHeight = (list: Array<Character>) => {
-  let sum = 0
+  const values: Array<number> = []
+
   list.forEach((item: Character) => {
-    if(item.height !== 'unknown') sum += parseInt(item.height)
+    if(item.height === 'unknown') values.push(0)
+    else values.push(parseInt(item.height))
   })
 
-  return Math.round(sum / list.length * 100) / 100
+  const min = Math.min(...values)
+  const max = Math.max(...values)
+
+  const newArray = values.filter(item => item !== min && item !== max)
+  let sum = 0
+
+  newArray.forEach(item => sum += item)
+
+  return Math.round(sum / newArray.length * 100) / 100
 }
 
 describe('App component', () => {
@@ -119,6 +129,6 @@ describe('App component', () => {
   })
 
   test('averageHeoght test', () => {
-    expect(testAverageHeight(list)).toBe(123.2)
+    expect(testAverageHeight(list)).toBe(138.67)
   })
 })
